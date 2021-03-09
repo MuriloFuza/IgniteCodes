@@ -93,4 +93,20 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
   customer.statement.push(statementOperation);
   return response.status(201).json({ message: 'Debit made' })
 })
+
+app.get('/statement/date', verifyIfExistsAccountCPF, (request, response) => {
+  const { customer } = request;
+  const { date } = request.query;
+
+  const dateFormat = new Date(date + " 00:00");
+
+  const statement = customer.statement.filter((statement) => statement.created_at.toDateString() === new Date(dateFormat).toDateString());
+
+  if (statement) {
+    return response.status(200).json(statement);
+  } else {
+    return response.status(400).json({ error: 'Statement not found!' });
+  }
+
+})
 app.listen(3333);
