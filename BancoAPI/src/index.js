@@ -113,4 +113,10 @@ app.put('/account', verifyIfExistsAccountCPF, (request, response) => {
 
   response.status(201).json({ message: 'Updated successfully' });
 })
+
+app.get('/account/client', verifyIfExistsAccountCPF, (request, response) => {
+  const { customer } = request;
+
+  return response.status(200).json({ customer });
+})
 app.listen(3333);
