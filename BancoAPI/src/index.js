@@ -102,11 +102,15 @@ app.get('/statement/date', verifyIfExistsAccountCPF, (request, response) => {
 
   const statement = customer.statement.filter((statement) => statement.created_at.toDateString() === new Date(dateFormat).toDateString());
 
-  if (statement) {
-    return response.status(200).json(statement);
-  } else {
-    return response.status(400).json({ error: 'Statement not found!' });
-  }
+  return response.status(200).json(statement);
+})
 
+app.put('/account', verifyIfExistsAccountCPF, (request, response) => {
+  const { name } = request.body;
+  const { customer } = request;
+
+  customer.name = name;
+
+  response.status(201).json({ message: 'Updated successfully' });
 })
 app.listen(3333);
