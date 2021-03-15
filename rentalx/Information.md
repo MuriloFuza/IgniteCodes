@@ -65,5 +65,15 @@ server is running!
 
 Adicionamos acima o `--transpile-only` que não irá causando erros de sintaxe durante o desenvolvimento, `--ignore-watch ` node_modules` para que ele não fique ouvindo caso façamos a adição de uma biblioteca e por ultimo a `respawn` que fará sempre um reload na aplicação sempre que salvamos uma alteração no nosso código.
 
+Para testarmos as alterações criamos um rota `GET` no `server.ts` e rodamos a aplicação.
+
+- Exemplo: 
+```
+app.get('/', (request: Request, response: Response) => {
+  return response.json({ message: 'Hello World' });
+})
+```
+Se tudo correu certo, ao alterar e salvar a mensagem a aplicação deve atualizar automaticamente. 
+
 
 
