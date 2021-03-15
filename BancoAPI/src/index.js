@@ -50,8 +50,6 @@ app.post('/account', (request, response) => {
     name,
     statement: []
   });
-
-  console.log(customers);
   return response.status(201).json({ message: 'Criado com sucesso!' });
 })
 
