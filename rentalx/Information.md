@@ -1,7 +1,7 @@
 # Rentalx
-Projeto utilizado no módulo 2 do Ignite
+Projeto utilizado no módulo 2 do Ignite - TODO não estara com todos os detalhes do código, apenas a criação.
 
-## Tecnologias (Serão atualizadas)
+## Tecnologias 
 
 - TypeScript
 - Node
