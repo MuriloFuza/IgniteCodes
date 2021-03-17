@@ -101,3 +101,90 @@ Caso tudo ocorra da maneira certo você terá como resultado:
 [ 'Sedan', 'Automóvel de três volumes' ]
 [ 'Hatch', 'Carro curto' ]
 ```
+Feito isso, com todos os dados retornando corretamente podemos começar a passar os dados do arquivo para o repositório
+ - Criamos um construtor para recuper a instância no UseCase
+ ``` JS
+constructor(private categoriesRepository: CategoriesRepository) { }
+ ```
+
+Feito isso precisamos pegar os dados que estão sendo passados para o `line`
+- Criamos uma função chamada loadCategories, onde passaremos os dados para um array realizando a formatação dos dados e assim parassando para nossa base de dados fake.
+- Mas caso tentamos apenas passas os dados diretamente com a estrutura atual teriamos o problema que a função não esperaria o fim do processo de leitura do arquivo e provavelmente nos retornaria uma [] vazio. Para contornar isso vamos utilizar uma Promisse como retorno principal ne função.
+
+```JS
+
+/*
+array imports = ['name','description']
+*/
+
+class ImportCategoryUseCase {
+  constructor(private categoriesRepository: CategoriesRepository) { }
+
+  loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
+    return new Promise((resolve, reject) => {
+      const stream = fs.createReadStream(file.path);
+      const categories: IImportCategory[] = [];
+
+      const parseFile = csvParse();
+
+      stream.pipe(parseFile);
+
+      parseFile.on('data', async (line) => {
+        const [name, description] = line;
+
+        categories.push({
+          name,
+          description,
+        });
+      })
+        .on('end', () => {
+          resolve(categories);
+        })
+        .on('error', (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  async execute(file: Express.Multer.File): Promise<void> {
+    const categories = await this.loadCategories(file);
+    
+        categories.map(async (category) => {
+      const { name, description } = category;
+
+      const existsCategory = this.categoriesRepository.findByName(name);
+
+      if (!existsCategory) {
+        this.categoriesRepository.create({
+          name,
+          description,
+        });
+      }
+    });
+  }
+}
+```
+
+Caso tudo tenha sido efetuado corretamente você podera testar no insomnia a importação do arquivo e terá este retorno: 
+``` JS
+[
+  {
+    "id": "4df6e0a8-9fa2-4709-b497-9fd956ee9e45",
+    "name": "SUV",
+    "description": "Utilitário esportivo",
+    "created_at": "2021-03-17T19:05:03.397Z"
+  },
+  {
+    "id": "d0e076a8-51b4-4b1d-9292-a52aaeda0121",
+    "name": "Sedan",
+    "description": "Automóvel de três volumes",
+    "created_at": "2021-03-17T19:05:03.397Z"
+  },
+  {
+    "id": "756cbfcc-6060-494a-9a92-a6195a02fc0f",
+    "name": "Hatch",
+    "description": "Carro curto",
+    "created_at": "2021-03-17T19:05:03.397Z"
+  }
+]
+```
