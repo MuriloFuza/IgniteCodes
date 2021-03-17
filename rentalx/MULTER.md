@@ -1,4 +1,4 @@
-# Upload de arquivos com MULTER
+# Upload de arquivos com MULTER e leitura de dados
 
 (Obs: Não esta sendo utilizado banco de dados)
 
@@ -58,4 +58,46 @@ Para que possamos verificar se tudo funcionou, utilizamos o `console.log(file)` 
   path: 'tmp\\3a2709f03aaa3a5fb7066d4bf2285dfc',
   size: 78
 }
+```
+E o arquvio ja se encontra dentro da pasta que criamos chama `tmp`.
+
+# Importando dados do arquivo
+
+O arquivo adicionado será lido e utilizado para adicionar dados na nossa base de dados de forma mais eficiente para isso criamos um UseCase de importações:
+
+- Criamos o nosso UseCase para as importações dos dados do arquivo com a mesma estrutura de arquivo dos demais UseCases.
+
+<img src='./AuxImages/useCase.PNG'>
+
+- [UseCase](./src/modules/cars/useCases/importCategory/ImportCategoryUseCase.ts)
+
+- [Controller](./src/modules/cars/useCases/importCategory/ImportCategoryController.ts)
+
+- [Index](./src/modules/cars/useCases/importCategory/Index.ts)
+
+Para avançarmos na leitura, utilizaremos o conteito de `stream` com um módulo nativo do Node - `File System`
+
+- Instalamos a biblioteca: `yarn add csv-parse` e realizamos a importação
+- Utilizamos o csv-parse para realizar a leitura linha por linha do arquivo
+```JS
+class ImportCategoryUseCase {
+  execute(file: Express.Multer.File): void {
+    const stream = fs.createReadStream(file.path);
+
+    const parseFile = csvParse();
+
+    stream.pipe(parseFile);
+
+    parseFile.on('data', async (line) => {
+      console.log(line);
+    });
+  }
+}
+```
+
+Caso tudo ocorra da maneira certo você terá como resultado:
+```SH
+[ 'SUV', 'Utilitário esportivo' ]
+[ 'Sedan', 'Automóvel de três volumes' ]
+[ 'Hatch', 'Carro curto' ]
 ```
