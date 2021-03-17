@@ -1,6 +1,6 @@
 # Upload de arquivos com MULTER
 
-(Obs: Não estpa sendo utilizado banco de dados)
+(Obs: Não esta sendo utilizado banco de dados)
 
 Aqui estará sendo apresentado o modo de instalação e utilização do multer para upload de arquivos.
 
@@ -40,7 +40,7 @@ Na rota acima foi declarado ` upload.single('file') `, pois passamos o `single` 
 
 A utilização no Isnomnia é simples, ao passarmos a rota precisamos utilizar o modo Multipart Form para passarmos o arquivo.
 
-- Arquivo utilizado: [Attachment]('./AuxArchive/attachment.csv')
+- Arquivo utilizado: [Attachment]('https://github.com/MuriloFuza/IgniteCodes/blob/main/rentalx/AuxArchive/attachment.csv')
 
 <img src='./AuxImages/insomnia_multipart.PNG'>
 
