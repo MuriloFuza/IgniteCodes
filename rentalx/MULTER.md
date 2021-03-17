@@ -64,6 +64,8 @@ E o arquivo ja se encontra dentro da pasta que criamos chamada `tmp`.
 O arquivo adicionado será lido e utilizado para adicionar dados na nossa base de dados de forma mais eficiente para isso criamos um UseCase de importações:
 
 - Criamos o nosso UseCase para as importações dos dados do arquivo com a mesma estrutura de arquivo dos demais UseCases.
+- Lembre-se de alterar sua rota para a utilização de controller.
+- Os códigos com as modificação estão listados abaixo.
 
 <img src='./AuxImages/useCase.PNG'>
 
@@ -75,8 +77,8 @@ O arquivo adicionado será lido e utilizado para adicionar dados na nossa base d
 
 Para avançarmos na leitura, utilizaremos o conteito de [stream](https://developer.mozilla.org/pt-BR/docs/Web/API/Streams_API/Concepts) com um módulo nativo do Node - [File System](https://nodejs.org/api/fs.html)
 
-- Instalamos a biblioteca: `yarn add csv-parse` e realizamos a importação
-- Utilizamos o csv-parse para realizar a leitura linha por linha do arquivo
+- Instalamos a biblioteca: `yarn add csv-parse` e realizamos a importação.
+- Utilizamos o csv-parse para realizar a leitura linha por linha do arquivo.
 ```JS
 class ImportCategoryUseCase {
   execute(file: Express.Multer.File): void {
