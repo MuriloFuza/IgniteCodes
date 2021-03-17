@@ -40,7 +40,7 @@ Na rota acima foi declarado ` upload.single('file') `, pois passamos o `single` 
 
 A utilização no Isnomnia é simples, ao passarmos a rota precisamos utilizar o modo Multipart Form para passarmos o arquivo.
 
-- Arquivo utilizado:   [Attachment]('https://github.com/MuriloFuza/IgniteCodes/tree/main/rentalx/AuxArchive')
+- Arquivo utilizado:   [Attachment](./AuxArchive/attachment.csv)
 
 <img src='./AuxImages/insomnia_multipart.PNG'>
 
