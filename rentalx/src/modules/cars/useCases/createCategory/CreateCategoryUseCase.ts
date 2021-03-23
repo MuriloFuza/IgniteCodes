@@ -1,3 +1,4 @@
+import { Category } from '../../entites/Category';
 import { ICategoriesRepository } from '../../Repositories/ICategoriesRepository';
 
 interface IRequest {
@@ -10,8 +11,8 @@ class CreateCategoryUseCase {
 
   }
 
-  execute({ name, description }: IRequest): void {
-    if (this.categoriesRepository.findByName(name)) {
+  async execute({ name, description }: IRequest): Promise<void> {
+    if (await this.categoriesRepository.findByName(name)) {
       throw new Error('Category already exists!');
     }
 
