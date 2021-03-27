@@ -5,6 +5,7 @@ import { ICreateSpecificationDTO, ISpecificationRepository } from '../ISpecifica
 
 class SpecificationRepository implements ISpecificationRepository {
   private repository: Repository<Specification>
+
   constructor() {
     this.repository = getRepository(Specification);
   }
