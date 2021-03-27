@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RentalX Documentation",
+    "title": "RentaX Documentation",
     "description": "This is an API Rent",
     "version": "1.0.0",
     "contact": {
@@ -20,19 +20,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "example": {
-                  "name": "category name sample",
-                  "description": "Category description sample"
-                }
+                "$ref":"#/definition/Category"
               }
             }
           }
@@ -77,6 +65,33 @@
         }
       }
     },
+    "/categories/import":{
+      "post":{
+        "tags":["Category"],
+        "summary":"Upload a new Category file",
+        "description": "Upload file",
+        "requestBody":{
+          "content":{
+            "multipart/form-data":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "file":{
+                    "type":"string",
+                    "format":"binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201":{
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/specifications": {
       "post": {
         "tags": [
@@ -88,19 +103,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "example": {
-                  "name": "Specification name sample",
-                  "description": "Specification description sample"
-                }
+               "$ref":"#/definition/Specification"
               }
             }
           }
@@ -145,5 +148,38 @@
         }
       }
     }
+  },
+  "definition":{
+    "Category":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Specification name sample",
+        "description": "Specification description sample"
+      }
+    },
+    "Specification":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Specification name sample",
+        "description": "Specification description sample"
+      }
+    }
   }
+
 }
