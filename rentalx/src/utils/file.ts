@@ -1,8 +1,6 @@
 import fs from 'fs';
 
-import { AppError } from '../errors/AppError';
-
-export const deleteFile = async (filename: string) => {
+export const deleteFile = async (filename: string):Promise<void> => {
   try {
     await fs.promises.stat(filename);
   } catch (error) {
