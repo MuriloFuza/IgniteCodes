@@ -1,15 +1,13 @@
 # Cadastro de carros
 
 **Requisitos funcionais**
-Deve ser possível cadastrar um novo carro.
-Deve ser possível listar todas as categorias.
+* [X] Deve ser possível cadastrar um novo carro.
+* [X] Deve ser possível listar todas as categorias.
 
 **Regra de negócio**
-* [ ] Apenas usuários administradores podem realizar cadastros.
-* [ ] Não deve ser possível cadastrar um carro com uma placa já existente.
-* [ ] Não deve ser possível alterar a placa de uma carro já cadastrado.
-* [ ] O carro deve ser cadastrado, por padrão, como disponível para aluguel.
-
+* [X] Apenas usuários administradores podem realizar cadastros.
+* [X] Não deve ser possível cadastrar um carro com uma placa já existente.
+* [X] O carro deve ser cadastrado, por padrão, como disponível para aluguel.
 
 # Listagem de carros
 
@@ -26,8 +24,6 @@ Deve ser possível listar todos os carros disponiveis pelo nome da marca.
 
 **Requisitos funcionais**
 Deve ser possível cadastrar uam especificação para um carro.
-Deve ser possível listar todas as especificações.
-Deve ser possível listar todos os carros
 
 **Regra de negócio**
 * [ ] Não deve ser possível cadastrar uma especificação para um carro não cadastrado.
@@ -38,14 +34,13 @@ Deve ser possível listar todos os carros
 
 **Requisitos funcionais**
 Deve ser possível cadastrar a imagem do carro.
-Deve ser possível listar todos os carros.
 
 **Requisitos não funcionais**
 Utilizar o multer para upload dos arquivos.
 
 **Regra de negócio**
 * [ ] O usuário deve poder cadastrar mais de uma imagem para o mesmo carro.
-* [ ] Apenas usuários administradores podem realizar cadastros.
+* [X] Apenas usuários administradores podem realizar cadastros.
 
 # Aluguel
 
