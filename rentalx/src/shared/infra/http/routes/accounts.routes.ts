@@ -14,9 +14,9 @@ const updateUserAvatarController = new UpdateUserAvatarController();
 
 const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
 
-accountRoutes.use(ensureAuthenticated);
 accountRoutes.post('/', createUserController.handle);
 
+accountRoutes.use(ensureAuthenticated);
 accountRoutes.patch('/avatar', uploadAvatar.single('avatar'), updateUserAvatarController.handle);
 
 export { accountRoutes };
