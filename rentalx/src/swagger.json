@@ -8,7 +8,8 @@
       "email": "muriloacademix@gmail.com"
     }
   },
-  "paths": {
+  "paths":{
+
     "/categories": {
       "post": {
         "tags": [
@@ -23,7 +24,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref":"#/definition/Category"
+                "$ref":"#/definitions/Category"
               }
             }
           }
@@ -45,7 +46,7 @@
         "description": "List all categories",
         "responses": {
           "200": {
-            "description": "Sucess",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -112,7 +113,7 @@
           "content": {
             "application/json": {
               "schema": {
-               "$ref":"#/definition/Specification"
+               "$ref":"#/definitions/Specification"
               }
             }
           }
@@ -203,7 +204,7 @@
             "content":{
               "application/json":{
                 "schema":{
-                  "$ref":"#/definition/Car"
+                  "$ref":"#/definitions/Car"
                 }
               }
             }
@@ -217,82 +218,84 @@
             }
           }
       }
-    },
-    "definition":{
-      "Category":{
-        "type":"object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "example": {
-          "name": "Category name sample",
-          "description": "Category description sample"
-        }
-      },
-      "Specification":{
-        "type":"object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "example": {
-          "name": "Specification name sample",
-          "description": "Specification description sample"
-        }
-      },
+    }
+  },
+  "definitions":{
 
-      "Car":{
-        "type":"object",
-        "properties":{
-          "name":{
-            "type":"string"
-          },
-          "description":{
-            "type":"string"
-          },
-          "daily_rate":{
-            "type": "number"
-          },
-          "license_plate":{
-            "type":"string"
-          },
-          "fine_amount":{
-            "type": "number"
-          },
-          "brand":{
-            "type":"string"
-          },
-          "category_id":{
-            "type":"string"
-          }
+    "Category":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        "example":{
-          "name": "Name Car",
-          "description": "Description Car",
-          "daily_rate": "100",
-          "license_plate": "ABC-1234",
-          "fine_amount": "60",
-          "brand": "Brand",
-          "category_id": "category_id"
+        "description": {
+          "type": "string"
         }
+      },
+      "example": {
+        "name": "Category name sample",
+        "description": "Category description sample"
       }
     },
-    "components":{
-      "securitySchemes" : {
-        "bearerAuth": {
-          "type": "http",
-          "scheme":"bearer",
-          "bearerFormat":"JWT"
+
+    "Specification":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
+      },
+      "example": {
+        "name": "Specification name sample",
+        "description": "Specification description sample"
+      }
+    },
+
+    "Car":{
+      "type":"object",
+      "properties":{
+        "name":{
+          "type":"string"
+        },
+        "description":{
+          "type":"string"
+        },
+        "daily_rate":{
+          "type": "number"
+        },
+        "license_plate":{
+          "type":"string"
+        },
+        "fine_amount":{
+          "type": "number"
+        },
+        "brand":{
+          "type":"string"
+        },
+        "category_id":{
+          "type":"string"
+        }
+      },
+      "example":{
+        "name": "Name Car",
+        "description": "Description Car",
+        "daily_rate": "100",
+        "license_plate": "ABC-1234",
+        "fine_amount": "60",
+        "brand": "Brand",
+        "category_id": "category_id"
+      }
+    }
+  },
+  "components":{
+    "securitySchemes" : {
+      "bearerAuth": {
+        "type": "http",
+        "scheme":"bearer",
+        "bearerFormat":"JWT"
       }
     }
   }
