@@ -52,3 +52,27 @@ Deve ser possível cadastrar um aluguel.
 * [X] Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário.
 * [X] Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
 * [X] O usuário deve estar logado.
+* [X] Ao realizar um aluguel o status do carro deverá ser alterado para indisponível
+
+# Devolução de carro
+
+**Requisitos funcionais**
+Deve ser possível realizar a devolução do carro.
+
+**Regra de negócio**
+* [X] Se o carro for devolvido com menos de 24 horas, deverá ser cobrado diária completa.
+* [X] Ao realizar a devolução, o carro deverá ser liberado para outro aluguel.
+* [X] Ao realizar a devolução, o usuário devera ser liberado para outro aluguel.
+* [X] Ao realizar a devolução, deverá ser calculado o total do aluguel.
+* [X] Caso o horário de devolução seja superior ao horário previsto de entrega, deverá ser
+cobrado multa proporcional aos dias de atraso.
+* [X] Caso haja multa, deverá ser somado ao total do aluguel.
+* [X] O usuário deve estar logado.
+
+# Listagem de Alugueis para usuário
+
+**Requisitos funcionais**
+Deve ser possível realizar uma busca de todos os alugueis para o usuário.
+
+**Regra de negócio**
+* [ ] O usuário deve estar logado.
