@@ -249,6 +249,7 @@
           "description": "Specification description sample"
         }
       },
+
       "Car":{
         "type":"object",
         "properties":{
