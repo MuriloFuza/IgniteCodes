@@ -14,6 +14,7 @@ let dayJsProvider: DaysJsDateProvider;
 
 describe('Criar um aluguel', () => {
   const dayAdd24Hours = dayjs().add(1, 'day').toDate();
+
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalRepositoryInMemory();
     carRepositoryInMemory = new CarRepositoryInMemory();
@@ -26,9 +27,19 @@ describe('Criar um aluguel', () => {
   });
 
   it('Deve ser possível criar um novo aluguel', async () => {
+    const car = await carRepositoryInMemory.create({
+      name: 'Name Car',
+      description: 'Description Car',
+      daily_rate: 100,
+      license_plate: 'ABC-1234',
+      fine_amount: 60,
+      brand: 'Brand',
+      category_id: '1234',
+    });
+
     const rental = await createRentalUseCase.execute({
       user_id: '12345',
-      car_id: '121212',
+      car_id: car.id,
       expected_return_date: dayAdd24Hours,
     });
 
@@ -37,44 +48,44 @@ describe('Criar um aluguel', () => {
   });
 
   it('Não deve ser possível criar um novo aluguel se já existe algum em aberto para o mesmo usuário', async () => {
-    expect(async () => {
-      const rental = await createRentalUseCase.execute({
-        user_id: '12345',
-        car_id: '121212',
-        expected_return_date: dayAdd24Hours,
-      });
+    await rentalsRepositoryInMemory.create({
+      user_id: '12345',
+      car_id: '112',
+      expected_return_date: dayAdd24Hours,
+    });
 
-      const rental2 = await createRentalUseCase.execute({
+    await expect(
+      createRentalUseCase.execute({
         user_id: '12345',
-        car_id: '1212125',
+        car_id: '1111',
         expected_return_date: dayAdd24Hours,
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError("There's a rental in progress for user!"));
   });
 
   it('Não deve ser possível criar um novo aluguel se já existe algum em aberto para o mesmo carro', async () => {
-    expect(async () => {
-      const rental = await createRentalUseCase.execute({
-        user_id: '12345',
-        car_id: '121212',
-        expected_return_date: dayAdd24Hours,
-      });
+    await rentalsRepositoryInMemory.create({
+      user_id: '12345',
+      car_id: 'test',
+      expected_return_date: dayAdd24Hours,
+    });
 
-      const rental2 = await createRentalUseCase.execute({
+    await expect(
+      createRentalUseCase.execute({
         user_id: '12346',
-        car_id: '121212',
+        car_id: 'test',
         expected_return_date: dayAdd24Hours,
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('Car is unavailable!'));
   });
 
-  it('Não deve ser possível criar um novo aluguel com duranção menor que 24 horas', async () => {
-    expect(async () => {
-      await createRentalUseCase.execute({
+  it('Não deve ser possível criar um novo aluguel com duração menor que 24 horas', async () => {
+    await expect(
+      createRentalUseCase.execute({
         user_id: '12345',
         car_id: '121212',
         expected_return_date: dayjs().toDate(),
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      }),
+    ).rejects.toEqual(new AppError('Invalid return time!'));
   });
 });

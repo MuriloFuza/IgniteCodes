@@ -37,9 +37,16 @@ describe('Criar Controlador de Listagem de Categoria', () => {
 
     const { token } = responseToken.body;
 
-    await request(app).post('/categories/').send({
-      name: 'Category Supertest',
-      description: 'Category Supertest',
+    await request(app).post('/categories').send({
+      name: 'Category 2 Supertest',
+      description: 'Category 2 Supertest',
+    }).set({
+      Authorization: `Bearer ${token}`,
+    });
+
+    await request(app).post('/categories').send({
+      name: 'Category  Supertest',
+      description: 'Category  Supertest',
     }).set({
       Authorization: `Bearer ${token}`,
     });
@@ -47,9 +54,8 @@ describe('Criar Controlador de Listagem de Categoria', () => {
     const response = await request(app).get('/categories');
 
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
     expect(response.body[0]).toHaveProperty('id');
-    expect(response.body[0].name).toEqual('Category Supertest');
-    expect(response.body[0].description).toEqual('Category Supertest');
+    expect(response.body[0].name).toEqual('Category 2 Supertest');
+    expect(response.body[0].description).toEqual('Category 2 Supertest');
   });
 });
