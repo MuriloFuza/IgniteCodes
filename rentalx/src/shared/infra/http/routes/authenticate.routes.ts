@@ -1,11 +1,15 @@
 import { Router } from 'express';
 
 import { AuthenticateUserController } from '@modules/accounts/userCases/authenticateUser/AuthenticateUserController';
+import { RefreshTokenController } from '@modules/accounts/userCases/refreshToken/RefreshTokenController';
 
 const authenticateRoutes = Router();
 
-const authenticateUserCOntroller = new AuthenticateUserController();
+const authenticateUserController = new AuthenticateUserController();
+const refreshTokenController = new RefreshTokenController();
 
-authenticateRoutes.post('/sessions', authenticateUserCOntroller.handle);
+authenticateRoutes.post('/sessions', authenticateUserController.handle);
+
+authenticateRoutes.post('/refresh-token', refreshTokenController.handle);
 
 export { authenticateRoutes };
