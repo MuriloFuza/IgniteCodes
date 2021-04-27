@@ -8,8 +8,8 @@ import { AppError } from '@shared/errors/AppError';
 @injectable()
 class CreateUserUseCase {
   constructor(
-        @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({

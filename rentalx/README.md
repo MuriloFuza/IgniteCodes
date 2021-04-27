@@ -75,4 +75,16 @@ cobrado multa proporcional aos dias de atraso.
 Deve ser possível realizar uma busca de todos os alugueis para o usuário.
 
 **Regra de negócio**
-* [ ] O usuário deve estar logado.
+* [X] O usuário deve estar logado.
+
+# Recuperação de senha
+
+**Requisitos funcionais**
+Deve ser possível o usuário recuperar a senha informando o email.
+O usuário deve receber um email com o passo a passo para a recuperação da senha.
+O usuário deve conseguir inserir uma nova senha.
+
+**Regra de negócio**
+* [ ] O usuário precisa informar uma nova senha.
+* [ ] O link enviado para recuperação deve expirar em 3 horas.
+
