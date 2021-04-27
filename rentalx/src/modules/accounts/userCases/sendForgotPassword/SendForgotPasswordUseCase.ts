@@ -21,9 +21,9 @@ class SendForgotPasswordUseCase {
   ) {}
 
   async execute(email: string): Promise<void> {
-    const user = await this.usersRepository.findByEmail(email);
+    const usersExists = await this.usersRepository.findByEmail(email);
 
-    if (!user) {
+    if (!usersExists) {
       throw new AppError('Users does not exists!');
     }
 
@@ -33,7 +33,7 @@ class SendForgotPasswordUseCase {
 
     await this.usersTokensRepository.create({
       refresh_token: token,
-      user_id: user.id,
+      user_id: usersExists.id,
       expires_date,
     });
 
