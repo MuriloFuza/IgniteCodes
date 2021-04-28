@@ -14,6 +14,10 @@ class DaysJsDateProvider implements IDateProvider {
     return dayjs().add(hours, 'hour').toDate();
   }
 
+  compareIfBefore(start_date: Date, end_date: Date): boolean {
+    return dayjs(start_date).isBefore(end_date);
+  }
+
   compareInDays(start_date: Date, end_date: Date): number {
     const end_date_utc = this.convertToUtc(end_date);
     const start_date_utc = this.convertToUtc(start_date);

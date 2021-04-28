@@ -35,20 +35,20 @@ describe('Criar Controlador de Listagem de Categoria', () => {
         password: 'admin',
       });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     await request(app).post('/categories').send({
       name: 'Category 2 Supertest',
       description: 'Category 2 Supertest',
     }).set({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${refresh_token}`,
     });
 
     await request(app).post('/categories').send({
       name: 'Category  Supertest',
       description: 'Category  Supertest',
     }).set({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${refresh_token}`,
     });
 
     const response = await request(app).get('/categories');
