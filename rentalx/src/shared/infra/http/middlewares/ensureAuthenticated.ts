@@ -13,7 +13,6 @@ interface IPayLoad{
 // eslint-disable-next-line max-len
 export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction): Promise<void> {
   const authHeader = request.headers.authorization;
-  const userTokenRepository = new UsersTokensRepository();
 
   if (!authHeader) {
     throw new AppError('Token missing', 401);
@@ -22,13 +21,10 @@ export async function ensureAuthenticated(request: Request, response: Response, 
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(token, auth.secret_refresh_token) as IPayLoad;
-
-    const user = await userTokenRepository.findByIdAndRefreshToken(user_id, token);
-
-    if (!user) {
-      throw new AppError('User does not exists', 401);
-    }
+    const { sub: user_id } = verify(
+      token,
+      auth.secret_token,
+    ) as IPayLoad;
 
     request.user = {
       id: user_id,
