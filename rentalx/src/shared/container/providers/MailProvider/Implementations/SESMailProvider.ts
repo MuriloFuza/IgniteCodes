@@ -14,7 +14,7 @@ class SESMailProvider implements IMailProvider {
     this.client = nodemailer.createTransport({
       SES: new SES({
         apiVersion: '2010-12-01',
-        region: process.env.AWS_BUCKET_REGION,
+        region: process.env.AWS_REGION,
       }),
     });
   }
@@ -26,16 +26,12 @@ class SESMailProvider implements IMailProvider {
 
     const templateHTML = templateParse(variables);
 
-    const message = await this.client.sendMail({
+    await this.client.sendMail({
       to,
-      from: 'Rentx <noreply@rentx.com.br>',
+      from: 'EmpreFácil <murilofuza@emprefacil.com.br>',
       subject,
       html: templateHTML,
     });
-
-    console.log('Message sent: %s', message.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
   }
 }
 
