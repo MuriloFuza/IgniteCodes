@@ -10,11 +10,7 @@
     "sourceMap": true,
     "target": "ES2020",
     "outDir": "lib",
-<<<<<<< HEAD
     "allowSyntheticDefaultImports": true
-=======
-    "allowSyntheticDefaultImports": true,
->>>>>>> e845f178765f2ea976cdce14b6d68f239df2ec20
   },
   "include": ["src/**/*.ts", "serverless.ts"],
   "exclude": [

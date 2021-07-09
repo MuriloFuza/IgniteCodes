@@ -4,10 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import Handlebars from 'handlebars'
 import dayjs from 'dayjs'
-<<<<<<< HEAD
 import {S3} from 'aws-sdk'
-=======
->>>>>>> e845f178765f2ea976cdce14b6d68f239df2ec20
 
 interface ICreateCertificate {
   id: string;
@@ -104,53 +101,6 @@ export const handle = async (event) => {
     Body: pdf,
     ContentType: 'application/pdf'
   }).promise();
-
-  //Gerar certificado
-  //Compilar usando o handlebars
-
-  const medalPath = path.join(process.cwd(), 'src', 'templates', 'selo.png');
-  const medal = fs.readFileSync(medalPath, 'base64');
-
-  const data: ITemplate = {
-    date: dayjs().format('DD/MM/YYYY'),
-    grade,
-    name,
-    id,
-    medal
-  }
-
-  const content  = await compile(data);
-
-  //Transformando em pdf
-  const browser = await chromium.puppeteer.launch({
-    headless: true,
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath
-  });
-
-
-
-  const page = await browser.newPage();
-
-  await page.setContent(content);
-
-
-  const pdf = await page.pdf({
-    format: 'a4',
-    landscape: true,
-    path: process.env.IS_OFFLINE ? 'certificate.pdf' : null,
-    printBackground: true,
-    preferCSSPageSize: true
-  });
-
-
-  console.log("Passou ");
-  await browser.close();
-
-  //salvar no S3
-
-
 
   return {
     statusCode: 201,
