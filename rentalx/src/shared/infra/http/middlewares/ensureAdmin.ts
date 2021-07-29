@@ -11,6 +11,7 @@ export async function ensureAdmin(
   const { id } = request.user;
 
   const usersRepository = new UsersRepository();
+
   const user = await usersRepository.findById(id);
 
   if (!user.admin) {
