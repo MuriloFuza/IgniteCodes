@@ -4,7 +4,7 @@ const options = {
 
   region: 'localhost',
   endpoint: 'http://localhost:8000',
-  accessKeyId: `${process.env.AWS_ACCESS_KEY}`, 
+  accessKeyId: `${process.env.AWS_ACCESS_KEY_ID}`, 
   secretAccessKey: `${process.env.AWS_ACCESS_ACCESS_KEY}`,
 }
 
