@@ -15,6 +15,7 @@ interface IRequest{
 
 interface IResponse{
     user:{
+        id: string;
         name:string;
         email:string;
     };
@@ -74,6 +75,7 @@ class AuthenticateUserUserCase {
       token,
       refresh_token,
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
       },
