@@ -51,6 +51,12 @@ class AuthenticateUserUserCase {
       throw new AppError('Email or password incorrect!');
     }
 
+    const refresh_token_already_exists = await this.usersTokensRepository.findByIdUser(user.id);
+
+    if (refresh_token_already_exists) {
+      await this.usersTokensRepository.deleteById(refresh_token_already_exists.id);
+    }
+
     const token = sign({}, secret_token, {
       subject: user.id,
       expiresIn: expires_in_token,

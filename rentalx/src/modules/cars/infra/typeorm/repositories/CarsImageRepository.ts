@@ -11,6 +11,15 @@ class CarsImageRepository implements ICarsImageRepository {
     this.repository = getRepository(CarImage);
   }
 
+  async findImage(car_id: string): Promise<CarImage> {
+    const CarImage = await this.repository.findOne({
+      where: {
+        car_id,
+      },
+    });
+    return CarImage;
+  }
+
   async create(car_id: string, image_name: string): Promise<CarImage> {
     const carImage = this.repository.create({
       car_id,
